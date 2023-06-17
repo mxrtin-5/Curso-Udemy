@@ -33,9 +33,9 @@ mostrarArray();
 console.log(numeros);
 
 
-numeros.reverse();
-mostrarArray();
-console.log(numeros);
+//numeros.reverse();
+//mostrarArray();
+//console.log(numeros);
 
 document.write('<h3>El array tiene: ' + numeros.length + ' elementos</h3>');
 
@@ -50,3 +50,17 @@ if(buscado && buscado !== -1){
     document.write('<h3>No encontrado</h3>');
 }
 
+// metodo slice
+// el metodo slice no muta el array original
+let slice = numeros.slice(0,3);
+console.log(slice);
+
+//metodo splice
+// este metodo si afecta al array original
+let splice = numeros.splice(3);
+console.log(splice);
+
+//metodo lenght
+//afecta al array original
+numeros.length = 5;
+console.log(numeros); 

@@ -235,3 +235,50 @@ const objetoResultado = {
 console.log(objetoResultado);
 
 
+//Ejercicio 
+//dada una cadena ded texto, comprobar si es un palindromo o no
+//palindromo: palabra que se lee igual al derecho que al reves
+
+/*
+function comprobarPalindromo(nombre){
+
+    let invertido = nombre.split('').reverse().join('');
+
+    if(invertido === nombre){
+
+        return true
+
+    }else{
+
+        return false
+
+    }
+
+}
+
+console.log(comprobarPalindromo('ana'));
+*/
+
+function palindromo (palabra){
+    let letras = [];
+
+    for(let i = 0; i < palabra.length; i++){
+        letras.push(palabra[i]);
+    }
+
+    let palabraInvertida = letras.reverse().join('');
+
+    if(palabra === palabraInvertida){
+
+        return true;
+
+    }else{
+
+        return false;
+
+    }
+    
+}
+
+console.log(palindromo('ana'));
+
