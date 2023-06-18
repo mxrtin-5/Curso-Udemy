@@ -1,4 +1,4 @@
-/*
+
 let rideTime = 30;
 let rideDistance = 7;
 let costPerMinute = [0.2, 0.35, 0.4, 0.45];
@@ -19,7 +19,7 @@ function solucion(rideTime, rideDistance, costPerMinute, costPerMile) {
 
 
 console.log(solucion(rideTime, rideDistance,  costPerMinute, costPerMile));
-*/
+
 /*
 let rideTime = 30;
 let rideDistance = 7;
