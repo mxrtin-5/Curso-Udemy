@@ -21,10 +21,58 @@ Los descriptores de propiedad se utilizan para definir las propiedades de un obj
 
 console.log(Reflect.ownKeys(person)); // podemos obtener las keys (propiedades) del objeto
 
-Reflect.defineProperty(person, 'phone', {writable:true}); // se puede definir una propiedad
+Reflect.defineProperty(person, 'phone', { writable: true }); // se puede definir una propiedad
 console.log(Reflect.has(person, 'phone')); // ahora si si se comprueba si tiene la propiedad phone, si la tiene
 
 Reflect.set(person, 'phone', '6457876');;
 console.log(Reflect.get(person, 'phone')); // ahora se puede ver el valor de phone
 Reflect.deleteProperty(person, 'email');// se elimina la propiedad email
 console.log(Reflect.has(person, 'email'));// ahora esto da false pq se elimino la propiedad
+
+
+// Por que utilizar este metodo para manipular objetos 
+
+// el metodo tradicional es asi 
+
+// Crear un objeto
+const persona = {
+    nombre: 'Juan',
+    edad: 25
+};
+
+// Agregar una propiedad al objeto
+persona.profesion = 'Ingeniero';
+
+// Acceder a una propiedad del objeto
+console.log(persona.nombre); // Output: 'Juan'
+
+// Editar una propiedad del objeto
+persona.edad = 30;
+
+// Borrar una propiedad del objeto
+delete persona.edad;
+
+console.log(persona); // Output: { nombre: 'Juan', profesion: 'ingeniero }
+
+
+
+
+// Crear un objeto
+const persona1 = {
+    nombre: 'Juan',
+    edad: 25
+};
+
+// Agregar una propiedad al objeto utilizando la API Reflect
+Reflect.set(persona1, 'profesion', 'Ingeniero');
+
+// Acceder a una propiedad del objeto utilizando la API Reflect
+console.log(Reflect.get(persona1, 'nombre')); // Output: 'Juan'
+
+// Editar una propiedad del objeto utilizando la API Reflect
+Reflect.set(persona1, 'edad', 30);
+
+// Borrar una propiedad del objeto utilizando la API Reflect
+Reflect.deleteProperty(persona1, 'profesion');
+
+console.log(persona1); // Output: { nombre: 'Juan', edad: 30 }
