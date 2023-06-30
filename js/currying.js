@@ -39,10 +39,10 @@ const transaccion = (fee, balance, amount) => {
     return balance + amount - fee;
 };
 
-const curry = (balance) =>{
-    return function(amount){
-        return function(fee){
-                return balance + amount - fee;
+const curry = (balance) => {
+    return function (amount) {
+        return function (fee) {
+            return balance + amount - fee;
         }
     }
 }
@@ -61,11 +61,18 @@ Utiliza la función parcial para calcular el impuesto sobre diferentes montos co
 
 
 
+function calcularImpuesto(monto, porcentaje) {
+    const impuesto = monto * (porcentaje / 100);
+    return monto + impuesto
+};
 
+function calcularImpuestoConPorcentaje(porcentaje) {
+    return (monto) => calcularImpuesto(monto, porcentaje);
+};
 
+const calculo = calcularImpuestoConPorcentaje(30);
 
-
-
+console.log(calculo(100)); // 100 con un impuesto de 30
 
 
 
@@ -80,13 +87,25 @@ Utiliza la función parcial para crear varios usuarios proporcionando solo el no
 */
 
 
+function crearUsuario(nombre, email, contraseña) {
+    return {
+        nombre,
+        email,
+        contraseña
+    }
+}
 
+function crearUsuarioConNombre(nombre) {
+    return function (email, contraseña) {
+        return crearUsuario(nombre, email, contraseña);
+    }
+}
 
+const logIn = crearUsuarioConNombre('Juan');
+console.log(logIn('juan@example.com', 'password123'));
 
-
-
-
-
+const crearUsuarioMaria = crearUsuarioConNombre('María');
+console.log(crearUsuarioMaria('maria@example.com', '123456'))
 
 
 /*
@@ -98,15 +117,20 @@ Utiliza la función parcial para generar URLs con el mismo dominio y diferentes 
 */
 
 
+function generarURL(dominio, ruta) {
+    return `https://${dominio}/${ruta}`
+}
 
+function generarURLConDominio(dominio) {
+    return function (ruta) {
+        return generarURL(dominio, ruta);
+    }
+}
 
+const ruta1 = generarURLConDominio('www.pito.com');
+console.log(ruta1('pitoooooo'));
 
-
-
-
-
-
-
+//esta bien uwu
 
 /*
 Conversión de unidades de medida:
@@ -116,19 +140,34 @@ Utiliza el currying para crear una función parcial convertirUnidadConUnidadOrig
 Utiliza la función parcial para convertir cantidades de la misma unidad a diferentes unidades de destino.
 */
 
+function convertirUnidad(unidadOrigen, cantidad, unidadDestino) {
+    let cantidadConvertida;
+
+    if (unidadOrigen === 'kg' && unidadDestino === 'lb') {
+        // Conversión de kilogramos a libras
+        cantidadConvertida = cantidad * 2.20462;
+    } else if (unidadOrigen === 'cm' && unidadDestino === 'inch') {
+        // Conversión de centímetros a pulgadas
+        cantidadConvertida = cantidad * 0.393701;
+    } else {
+        // Manejar otras conversiones o casos no soportados
+        cantidadConvertida = null;
+    }
+
+    // se pueden agregar mas conversiones
+
+    return cantidadConvertida;
+}
 
 
+function convertirUnidadConUnidadOrigen(unidadOrigen){
+    return function(cantidad, unidadDestino){
+        return convertirUnidad(unidadOrigen, cantidad, unidadDestino);
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
+const convertirKgToLb = convertirUnidadConUnidadOrigen('kg');
+console.log(convertirKgToLb(100, 'lb'));
 
 /*
 Validación de datos:
@@ -137,3 +176,19 @@ Crea una función validarDato que tome un patrón de validación y un valor y de
 Utiliza el currying para crear una función parcial validarDatoConPatrón que tome solo el patrón de validación y devuelva una función que espera el valor.
 Utiliza la función parcial para validar diferentes valores con el mismo patrón de validación.
 */
+
+function validarDato(patronValidacion, valor){
+    const expresionRegular = new RegExp(patronValidacion);
+    return expresionRegular.test(valor);
+}
+
+function validarDatoConPatron(patron){
+    return function(valor){
+        return validarDato(patron, valor)
+        };
+}
+
+
+const validarEmail = validarDatoConPatron(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+console.log(validarEmail("correo@example.com")); // Output: true (el valor cumple con el patrón de un email válido)
+console.log(validarEmail("correoexample.com")); // Output: false (el valor no cumple con el patrón de un email válido)

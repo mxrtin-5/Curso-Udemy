@@ -1,0 +1,47 @@
+body{
+    background-color: rgb(17, 17, 17);
+    color: white;
+}
+
+.box{
+    width: 250px;
+    float: left;
+    margin: 20px;
+    height: 250px;
+}
+
+input{
+    font-size: large;
+    text-align: center;
+    outline: none;
+    display: block;
+    transition:.4s ease all;
+}
+
+input:focus{
+    filter: brightness(0.8);
+}
+
+button{
+    cursor: pointer;
+    padding: 10px 6px;
+    margin-top: 10px;
+    border-radius: 15px;
+    transition: all .4s ease;
+}
+
+button:hover{
+    color: white;
+    background-color: blueviolet;
+}
+
+.dashed{
+    border: 3px dashed white;
+    padding: 3px;
+}
+
+h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

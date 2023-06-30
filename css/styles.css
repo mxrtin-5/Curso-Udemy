@@ -1,0 +1,41 @@
+body{
+    background-color: rgb(20, 20, 20);
+    color: rgb(202, 34, 253);
+}
+
+input{
+    margin-top: 10px;
+    transition: all .4s ease;
+    border-radius: 10px;
+    height: 20px;
+}
+
+input:focus{
+    outline: none;
+    border: solid #fff 2px;
+    filter: brightness(0.7);
+}
+
+div{
+    margin-top: 50px;
+}
+
+button{
+    display: block;
+    margin-top: 20px;
+    font-size: 1.3em;
+    padding:.5rem 1.6rem;
+    border-radius:.8rem;
+    cursor: pointer;
+    transition: all ease-in-out.2s;
+    text-decoration: none;
+    outline:none;
+    box-shadow: inset -7px -9px 10px rgba(0,0,0,0.7)
+}
+
+button:hover{
+    transform: translateY(-3px);
+    filter: brightness(0.9);
+    background-color: blueviolet;
+    color: white;
+}
